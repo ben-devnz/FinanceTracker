@@ -5,40 +5,160 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:FinanceTracker"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Title="MainWindow"
-    Width="800"
-    Height="450"
+    Title="Finance Tracker"
+    Width="1000"
+    Height="600"
+    MinWidth="800"
+    MinHeight="500"
+    Background="#F7FAFC"
     mc:Ignorable="d">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*" />
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="5*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <TextBlock
-            Grid.Row="0"
-            Margin="20"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Center"
-            Style="{StaticResource H1}"
-            Text="Finance Tracker" />
-        <TabControl Grid.Row="1">
-            <TabItem Header="Dashboard">
-                <DataGrid Margin="20">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Width="100" Header="Date" />
-                        <DataGridTextColumn Width="*" Header="Description" />
-                        <DataGridTextColumn Width="120" Header="Amount" />
-                        <DataGridComboBoxColumn Width="150" Header="Category" />
-                    </DataGrid.Columns>
-                </DataGrid>
-            </TabItem>
-            <TabItem Header="Transactions" />
-            <TabItem Header="Categories" />
-            <TabItem Header="Reports" />
-        </TabControl>
 
+        <!--  Header  -->
+        <Border
+            Grid.Row="0"
+            Background="{StaticResource AccentBrush}"
+            BorderBrush="#E5E7EB"
+            BorderThickness="0,0,0,1">
+            <TextBlock
+                Margin="32,20"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Foreground="White"
+                Style="{StaticResource H1}"
+                Text="💰 Finance Tracker" />
+        </Border>
+
+        <!--  Tab Control  -->
+        <TabControl
+            Grid.Row="1"
+            Margin="0"
+            Style="{StaticResource ModernTabControl}">
+            <TabItem Header="Dashboard" Style="{StaticResource ModernTabItem}">
+                <Grid Margin="24">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <!--  Button bar  -->
+                    <StackPanel
+                        Grid.Row="0"
+                        Margin="0,0,0,16"
+                        Orientation="Horizontal">
+                        <Button
+                            Margin="0,0,12,0"
+                            Command="{Binding AddExpenseCommand}"
+                            Content="+ Add Expense"
+                            Style="{StaticResource ConstructiveButton}" />
+                        <Button
+                            Command="{Binding RemoveExpenseCommand}"
+                            Content="Remove"
+                            Style="{StaticResource DestructiveButton}" />
+                    </StackPanel>
+
+                    <!--  DataGrid Container  -->
+                    <Border
+                        Grid.Row="1"
+                        Margin="0,0,0,20"
+                        Background="White"
+                        BorderBrush="#E5E7EB"
+                        BorderThickness="1"
+                        CornerRadius="8">
+                        <Border.Effect>
+                            <DropShadowEffect
+                                BlurRadius="10"
+                                Direction="270"
+                                Opacity="0.1"
+                                ShadowDepth="2" />
+                        </Border.Effect>
+                        <DataGrid
+                            AutoGenerateColumns="False"
+                            CanUserAddRows="False"
+                            CellStyle="{StaticResource ModernDataGridCell}"
+                            ColumnHeaderStyle="{StaticResource ModernDataGridColumn}"
+                            HeadersVisibility="Column"
+                            IsReadOnly="True"
+                            ItemsSource="{Binding Expenses}"
+                            RowStyle="{StaticResource ModernDataGridRow}"
+                            SelectedItem="{Binding SelectedExpense}"
+                            Style="{StaticResource ModernDataGrid}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn
+                                    Width="120"
+                                    Binding="{Binding Date, StringFormat='dd/MM/yyyy'}"
+                                    Header="Date">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Left" />
+                                            <Setter Property="VerticalAlignment" Value="Center" />
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn
+                                    Width="*"
+                                    Binding="{Binding Description}"
+                                    Header="Description">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Left" />
+                                            <Setter Property="VerticalAlignment" Value="Center" />
+                                            <Setter Property="Padding" Value="4,0" />
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn
+                                    Width="120"
+                                    Binding="{Binding Amount, StringFormat='${0:N2}'}"
+                                    Header="Amount">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Left" />
+                                            <Setter Property="VerticalAlignment" Value="Center" />
+                                            <Setter Property="FontWeight" Value="SemiBold" />
+                                            <Setter Property="Foreground" Value="#059669" />
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn
+                                    Width="150"
+                                    Binding="{Binding Category}"
+                                    Header="Category">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Left" />
+                                            <Setter Property="VerticalAlignment" Value="Center" />
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Border>
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock
+                            Grid.Column="0"
+                            Style="{StaticResource Body}"
+                            Text="Total: " />
+                        <TextBlock
+                            Grid.Column="1"
+                            Style="{StaticResource Body}"
+                            Text="{Binding TotalExpenses, StringFormat='${0:N2}'}" />
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Transactions" Style="{StaticResource ModernTabItem}" />
+            <TabItem Header="Categories" Style="{StaticResource ModernTabItem}" />
+            <TabItem Header="Reports" Style="{StaticResource ModernTabItem}" />
+        </TabControl>
     </Grid>
 </Window>

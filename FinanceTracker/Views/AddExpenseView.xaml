@@ -1,0 +1,108 @@
+﻿<Window
+    x:Class="FinanceTracker.Views.AddExpenseView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:FinanceTracker.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="AddExpenseView"
+    Width="450"
+    Height="560"
+    MinHeight="560"
+    mc:Ignorable="d">
+    <Border
+        Margin="25"
+        Padding="30"
+        Background="{StaticResource CardBackgroundBrush}"
+        CornerRadius="12">
+        <Border.Effect>
+            <DropShadowEffect
+                BlurRadius="20"
+                Opacity="0.15"
+                ShadowDepth="3"
+                Color="#000000" />
+        </Border.Effect>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <!--  Header  -->
+                <RowDefinition Height="Auto" />
+                <!--  Form  -->
+                <RowDefinition Height="Auto" />
+                <!--  Buttons  -->
+            </Grid.RowDefinitions>
+
+            <!--  Header  -->
+            <StackPanel Grid.Row="0" Margin="0,0,0,20">
+                <TextBlock
+                    Foreground="{StaticResource TextPrimaryBrush}"
+                    Style="{StaticResource H2}"
+                    Text="💲Add New Expense" />
+                <TextBlock
+                    Margin="0,5,0,0"
+                    FontFamily="{StaticResource PrimaryFont}"
+                    FontSize="12"
+                    Foreground="{StaticResource TextSecondaryBrush}"
+                    Text="Fill in the details below to add an Expense" />
+            </StackPanel>
+
+            <!--  Form Fields  -->
+            <StackPanel Grid.Row="1">
+                <!--  Description  -->
+                <Label
+                    Content="Description *"
+                    Foreground="{StaticResource TextPrimaryBrush}"
+                    Style="{StaticResource Label}" />
+                <TextBox Style="{StaticResource PrimaryTextBox}" Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" />
+
+                <!--  Amount  -->
+                <Label
+                    Content="Amount *"
+                    Foreground="{StaticResource TextPrimaryBrush}"
+                    Style="{StaticResource Label}" />
+                <TextBox Style="{StaticResource PrimaryTextBox}" Text="{Binding Amount, UpdateSourceTrigger=PropertyChanged, StringFormat='0:N2'}" />
+
+                <!--  Category  -->
+                <Label
+                    Content="Category *"
+                    Foreground="{StaticResource TextPrimaryBrush}"
+                    Style="{StaticResource Label}" />
+                <TextBox Style="{StaticResource PrimaryTextBox}" Text="{Binding Category, UpdateSourceTrigger=PropertyChanged}" />
+
+                <!--  Date  -->
+                <Label
+                    Content="Date *"
+                    Foreground="{StaticResource TextPrimaryBrush}"
+                    Style="{StaticResource Label}" />
+                <DatePicker SelectedDate="{Binding SelectedDate, Mode=TwoWay}" Style="{StaticResource ModernDatePicker}" />
+                <!--<TextBox Style="{StaticResource PrimaryTextBox}" Text="{Binding Date, UpdateSourceTrigger=PropertyChanged}" />-->
+
+                <!--  Helper Text  -->
+                <TextBlock
+                    Margin="0,15,0,0"
+                    FontFamily="{StaticResource PrimaryFont}"
+                    FontSize="12"
+                    Foreground="#95A5A6"
+                    Text="* Required fields" />
+            </StackPanel>
+
+            <!--  Action Buttons  -->
+            <StackPanel
+                Grid.Row="2"
+                Margin="0,25,0,0"
+                HorizontalAlignment="Right"
+                Orientation="Horizontal">
+                <Button
+                    Margin="0,0,10,0"
+                    Command="{Binding CancelExpenseCommand}"
+                    Content="✖ Cancel"
+                    Style="{StaticResource DestructiveButton}" />
+                <Button
+                    Command="{Binding SaveExpenseCommand}"
+                    Content="💾 Save Expense"
+                    Style="{StaticResource ConstructiveButton}" />
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>

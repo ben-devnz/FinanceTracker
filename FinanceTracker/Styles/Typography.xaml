@@ -1,26 +1,34 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
     <FontFamily x:Key="PrimaryFont">pack://application,,,/Fonts/#Roboto</FontFamily>
-    
-    <!-- Heading 1 (uses Roboto-Bold) -->
+
+    <!--  Heading 1 (uses Roboto-Bold)  -->
     <Style x:Key="H1" TargetType="TextBlock">
-        <Setter Property="FontFamily" Value="{StaticResource PrimaryFont}"/>
-        <Setter Property="FontSize" Value="32"/>
-        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="FontFamily" Value="{StaticResource PrimaryFont}" />
+        <Setter Property="FontSize" Value="28" />
+        <Setter Property="FontWeight" Value="Bold" />
     </Style>
 
-    <!-- Heading 2 (uses Roboto-SemiBold) -->
+    <!--  Heading 2 (uses Roboto-SemiBold)  -->
     <Style x:Key="H2" TargetType="TextBlock">
-        <Setter Property="FontFamily" Value="{StaticResource PrimaryFont}"/>
-        <Setter Property="FontSize" Value="22"/>
-        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="FontFamily" Value="{StaticResource PrimaryFont}" />
+        <Setter Property="FontSize" Value="22" />
+        <Setter Property="FontWeight" Value="SemiBold" />
     </Style>
 
-    <!-- Body (uses Roboto-Regular) -->
+    <!--  Body (uses Roboto-Regular)  -->
     <Style x:Key="Body" TargetType="TextBlock">
-        <Setter Property="FontFamily" Value="{StaticResource PrimaryFont}"/>
-        <Setter Property="FontSize" Value="14"/>
-        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="FontFamily" Value="{StaticResource PrimaryFont}" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontWeight" Value="Normal" />
     </Style>
-    
+
+    <!--  Label (uses Roboto-Regular)  -->
+    <Style x:Key="Label" TargetType="Label">
+        <Setter Property="FontFamily" Value="{StaticResource PrimaryFont}" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+    </Style>
+
+
 </ResourceDictionary>
